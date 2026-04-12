@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ajmeri Gharib Nawaz Foundation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --emerald-50: #ecfdf5; --emerald-100: #d1fae5; --emerald-200: #a7f3d0;
+      --emerald-300: #6ee7b7; --emerald-600: #059669; --emerald-700: #047857;
+      --emerald-800: #065f46; --emerald-900: #064e3b; --emerald-950: #022c22;
+      --amber-50: #fffbeb; --amber-100: #fef3c7; --amber-200: #fde68a;
+      --amber-300: #fcd34d; --amber-400: #fbbf24; --amber-500: #f59e0b;
+      --amber-600: #d97706; --amber-800: #92400e;
+      --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0;
+      --slate-400: #94a3b8; --slate-500: #64748b; --slate-600: #475569;
+      --rose-50: #fff1f2; --rose-600: #e11d48;
+      --sky-50: #f0f9ff; --sky-600: #0284c7;
+      --orange-50: #fff7ed; --orange-600: #ea580c;
+      --violet-50: #f5f3ff; --violet-600: #7c3aed;
+      --green-500: #22c55e; --green-600: #16a34a;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: #fdfcf9; color: var(--emerald-950); overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    input, textarea, select { font-family: inherit; }
+    .page { display: none; }
+    .page.active { display: block; }
+
+    nav.navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.07); box-shadow: 0 1px 8px rgba(0,0,0,0.04); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .nav-logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .nav-logo-text h1 { font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--emerald-800); line-height: 1.2; }
+    .nav-logo-text p { font-size: 11px; color: var(--slate-500); letter-spacing: .04em; }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a { padding: 7px 12px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--slate-500); transition: all .2s; white-space: nowrap; cursor: pointer; }
+    .nav-links a:hover, .nav-links a.active { color: var(--emerald-700); background: rgba(4,120,87,.06); }
+    .nav-donate { background: var(--emerald-800) !important; color: #fff !important; padding: 9px 18px !important; border-radius: 999px !important; font-weight: 600 !important; box-shadow: 0 2px 8px rgba(4,120,87,.25); }
+    .nav-donate:hover { background: var(--emerald-700) !important; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .hamburger { display: none; padding: 8px; border-radius: 8px; color: var(--slate-600); }
+    .hamburger:hover { background: var(--slate-100); }
+    .mobile-menu { display: none; background: #fff; border-top: 1px solid var(--slate-200); padding: 12px 16px; }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; padding: 11px 14px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--slate-600); margin-bottom: 2px; cursor: pointer; }
+    .mobile-menu a:hover, .mobile-menu a.active { color: var(--emerald-700); background: rgba(4,120,87,.06); }
+    .mobile-donate-btn { display: block; text-align: center; margin-top: 10px; padding: 12px; background: var(--emerald-800); color: #fff; border-radius: 999px; font-size: 14px; font-weight: 600; }
+    @media(max-width:1023px) { .nav-links { display:none; } .hamburger { display:flex; align-items:center; } }
+    @media(max-width:639px) { .nav-donate { display: none; } .nav-logo-text { display: none; } }
+
+    footer { background: var(--emerald-800); color: rgba(255,255,255,.85); }
+    .footer-top-bar { height: 4px; background: linear-gradient(90deg, rgba(251,191,36,.5), #fbbf24, rgba(251,191,36,.5)); }
+    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 1.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+    @media(min-width:640px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media(min-width:1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; } }
+    .footer-brand h3 { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #fff; }
+    .footer-brand p { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,.65); margin-bottom: 14px; }
+    .footer-col h4 { font-family: var(--font-heading); font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 14px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,.65); transition: color .2s; cursor: pointer; }
+    .footer-col ul li a:hover { color: #fbbf24; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 13px; color: rgba(255,255,255,.65); }
+    .footer-contact-icon { color: #fbbf24; flex-shrink: 0; margin-top: 1px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 2rem; margin-top: 3.5rem; text-align: center; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,.4); margin-bottom: 4px; }
+
+    .fab-whatsapp { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200; display: flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; background: var(--green-500); color: #fff; font-size: 14px; font-weight: 600; box-shadow: 0 4px 20px rgba(34,197,94,.4); transition: all .3s; }
+    .fab-whatsapp:hover { background: var(--green-600); transform: scale(1.05); }
+    @media(max-width:639px) { .fab-whatsapp span { display: none; } }
+
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 1rem; background-image: url('https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/e05f2e514_BulandDarwazaatnight.png'); background-size: cover; background-position: center; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(2,44,34,.7), rgba(6,78,59,.6), rgba(2,44,34,.8)); }
+    .hero-content { position: relative; z-index: 10; text-align: center; max-width: 900px; margin: 0 auto; }
+    .hero-arabic { color: #fcd34d; font-size: clamp(22px,4vw,36px); margin-bottom: 1.5rem; opacity: .9; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.2); color: #fcd34d; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 7px 16px; border-radius: 999px; margin-bottom: 1.75rem; }
+    .hero h1 { font-family: var(--font-heading); font-weight: 700; font-size: clamp(2rem,5.5vw,3.75rem); color: #fff; line-height: 1.2; margin-bottom: 1.25rem; }
+    .hero h1 em { color: #fcd34d; }
+    .hero p { font-size: clamp(15px,2.2vw,20px); color: rgba(209,250,229,.9); max-width: 660px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--amber-500); color: #fff; padding: 14px 30px; border-radius: 999px; font-weight: 600; font-size: 15px; box-shadow: 0 8px 32px rgba(120,53,15,.4); transition: all .3s; cursor: pointer; }
+    .btn-primary:hover { background: var(--amber-400); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.1); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.3); color: #fff; padding: 14px 30px; border-radius: 999px; font-weight: 600; font-size: 15px; transition: all .3s; cursor: pointer; }
+    .btn-ghost:hover { background: rgba(255,255,255,.2); }
+
+    .section { padding: 5rem 1rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .container-sm { max-width: 800px; margin: 0 auto; }
+    .container-md { max-width: 1000px; margin: 0 auto; }
+    .bg-white { background: #fff; }
+    .bg-slate { background: var(--slate-50); }
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center; }
+    @media(min-width:1024px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media(min-width:640px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+    @media(min-width:1024px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+    .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media(min-width:640px) { .grid-4 { grid-template-columns: 1fr 1fr; } }
+    @media(min-width:1280px) { .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+    .text-center { text-align: center; }
+    .eyebrow { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; color: var(--amber-600); background: var(--amber-50); margin-bottom: 10px; }
+    .eyebrow-light { color: var(--amber-300); background: rgba(251,191,36,.12); }
+    .eyebrow-emerald { color: var(--emerald-700); background: var(--emerald-50); }
+    .section-title { font-family: var(--font-heading); font-weight: 700; font-size: clamp(1.6rem,3.5vw,2.4rem); color: var(--emerald-950); margin-bottom: 1rem; line-height: 1.25; }
+    .section-title em { color: var(--emerald-700); font-style: italic; }
+    .section-title.light { color: #fff; }
+    .section-subtitle { font-size: 15px; color: var(--slate-500); max-width: 640px; margin: 0 auto; line-height: 1.7; }
+    .section-subtitle.light { color: rgba(255,255,255,.65); }
+    .mb-12 { margin-bottom: 3rem; } .mb-14 { margin-bottom: 3.5rem; }
+
+    .page-hero { position: relative; height: clamp(220px,45vh,420px); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; }
+    .page-hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.4), rgba(0,0,0,.6)); }
+    .page-hero-content { position: relative; z-index: 10; text-align: center; padding: 0 1rem; }
+    .page-hero-content h1 { font-family: var(--font-heading); font-size: clamp(1.8rem,5vw,3.2rem); font-weight: 700; color: #fff; margin-bottom: 12px; }
+    .page-hero-content p { font-size: 16px; color: rgba(255,255,255,.8); max-width: 480px; margin: 0 auto; }
+
+    .card { background: #fff; border-radius: 20px; border: 1px solid rgba(0,0,0,.06); box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+    .card-pad { padding: 2.5rem; }
+    .card-center { text-align: center; }
+    .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(4,120,87,.1); color: var(--emerald-700); margin-bottom: 1.5rem; }
+    .card h3 { font-family: var(--font-heading); font-size: 19px; font-weight: 600; color: var(--emerald-950); margin-bottom: .75rem; }
+    .card p { font-size: 14px; color: var(--slate-500); line-height: 1.7; }
+    .icon-orange { background: var(--orange-50); color: var(--orange-600); }
+    .icon-sky { background: var(--sky-50); color: var(--sky-600); }
+    .icon-rose { background: var(--rose-50); color: var(--rose-600); }
+    .icon-violet { background: var(--violet-50); color: var(--violet-600); }
+    .icon-emerald { background: var(--emerald-50); color: var(--emerald-600); }
+    .icon-amber { background: var(--amber-50); color: var(--amber-600); }
+
+    .ramzan-section { position: relative; padding: 6rem 1rem; overflow: hidden; background: linear-gradient(135deg, var(--emerald-950), #0a2a1a, var(--emerald-950)); }
+    .stars-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .star { position: absolute; border-radius: 50%; background: #fff; }
+    .ramzan-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(251,191,36,.12); border: 1px solid rgba(251,191,36,.25); color: #fcd34d; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 7px 16px; border-radius: 999px; margin-bottom: 1.5rem; }
+    .highlight-card { display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 20px 28px; transition: all .3s; }
+    .highlight-card:hover { background: rgba(255,255,255,.1); }
+    .highlight-icon { flex-shrink: 0; width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+    .highlight-card .value { font-family: var(--font-heading); font-weight: 700; font-size: 24px; margin-bottom: 2px; }
+    .highlight-card .label { font-size: 13px; color: rgba(209,250,229,.7); }
+    .c-amber { color: #fcd34d; } .c-emerald { color: var(--emerald-300); }
+    .bg-amber-dim { background: rgba(251,191,36,.1); } .bg-emerald-dim { background: rgba(16,185,129,.1); }
+
+    .impact-section { background: linear-gradient(135deg, var(--emerald-900), var(--emerald-800), var(--emerald-900)); padding: 5rem 1rem; }
+    .impact-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media(min-width:640px) { .impact-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .impact-item { text-align: center; }
+    .impact-num { font-family: var(--font-heading); font-weight: 700; font-size: clamp(2.5rem,6vw,4rem); margin-bottom: 6px; }
+    .impact-label { font-size: 15px; color: var(--emerald-100); font-weight: 500; }
+
+    .quote-section { background: var(--amber-50); border-top: 1px solid var(--amber-100); border-bottom: 1px solid var(--amber-100); padding: 3.5rem 1rem; text-align: center; }
+    .quote-text { font-family: var(--font-heading); font-size: clamp(1.3rem,3vw,1.8rem); color: var(--emerald-950); font-style: italic; line-height: 1.55; margin-bottom: 1.25rem; }
+
+    .dua-section { background: linear-gradient(135deg, var(--emerald-950), var(--emerald-900)); padding: 5rem 1rem; }
+    .dua-section h2 { font-family: var(--font-heading); font-size: clamp(1.6rem,3.5vw,2.4rem); font-weight: 700; color: #fff; margin-bottom: .75rem; }
+    .dua-form { background: rgba(255,255,255,.05); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 2rem; text-align: left; }
+    .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--emerald-200); margin-bottom: 8px; }
+    .form-input { width: 100%; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 12px 16px; color: #fff; font-size: 14px; outline: none; transition: all .2s; margin-bottom: 1.25rem; }
+    .form-input::placeholder { color: rgba(110,231,183,.4); }
+    .form-input:focus { border-color: var(--amber-400); background: rgba(255,255,255,.15); }
+    .form-submit { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--amber-500); color: #fff; padding: 14px; border-radius: 14px; font-size: 14px; font-weight: 600; transition: all .3s; border: none; cursor: pointer; }
+    .form-submit:hover { background: var(--amber-400); }
+    .dua-success { background: rgba(255,255,255,.1); border-radius: 20px; padding: 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .dua-success h3 { font-family: var(--font-heading); font-size: 22px; color: #fff; }
+    .dua-success p { color: var(--emerald-200); font-size: 14px; }
+    .dua-success button { color: var(--amber-400); font-size: 13px; text-decoration: underline; }
+
+    .work-section { padding: 4rem 1rem; }
+    .work-section:nth-child(even) { background: var(--slate-50); }
+    .work-num { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--amber-600); margin-bottom: 10px; }
+    .work-section h2 { font-family: var(--font-heading); font-size: clamp(1.4rem,3vw,2rem); font-weight: 700; color: var(--emerald-950); margin-bottom: 1rem; }
+    .work-section p { font-size: 15px; color: var(--slate-600); line-height: 1.75; }
+    .work-img { border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,.12); width: 100%; height: 300px; object-fit: cover; }
+
+    .bank-card-wrap { background: #fff; border-radius: 18px; border: 1px solid var(--slate-100); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+    .bank-card-header { background: linear-gradient(90deg, var(--emerald-700), var(--emerald-800)); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .bank-card-header h4 { font-family: var(--font-heading); font-weight: 700; color: #fff; font-size: 15px; }
+    .bank-card-badge { font-size: 11px; font-weight: 700; background: var(--amber-400); color: var(--emerald-950); padding: 3px 10px; border-radius: 999px; }
+    .bank-card-body { padding: 0 24px; }
+    .bank-card-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--slate-100); }
+    .bank-card-row:last-child { border-bottom: none; }
+    .bank-card-row .rl { font-size: 13px; color: var(--slate-500); flex-shrink: 0; margin-right: 1rem; }
+    .bank-card-row .rv { display: flex; align-items: center; gap: 6px; }
+    .bank-card-row .rv span { font-size: 13px; font-weight: 600; color: var(--emerald-900); text-align: right; }
+    .copy-btn { color: var(--emerald-600); background: none; border: none; cursor: pointer; padding: 2px; flex-shrink: 0; }
+    .upi-card-big { background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900)); border-radius: 24px; padding: 2rem; text-align: center; color: #fff; box-shadow: 0 12px 40px rgba(4,120,87,.25); margin-bottom: 2rem; }
+
+    .gallery-grid { columns: 1; gap: 1.5rem; }
+    @media(min-width:640px) { .gallery-grid { columns: 2; } }
+    @media(min-width:1024px) { .gallery-grid { columns: 3; } }
+    .gallery-item { break-inside: avoid; margin-bottom: 1.5rem; position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--slate-100); }
+    .gallery-item img { width: 100%; display: block; transition: transform .5s; }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-caption { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.6), transparent); opacity: 0; transition: opacity .3s; display: flex; align-items: flex-end; padding: 14px; }
+    .gallery-item:hover .gallery-caption { opacity: 1; }
+    .gallery-caption p { color: #fff; font-size: 13px; font-weight: 500; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media(min-width:1024px) { .contact-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
+    .contact-card { background: #fff; border-radius: 18px; padding: 1.5rem; text-align: center; border: 1px solid rgba(0,0,0,.06); }
+    .contact-card .cc-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: rgba(4,120,87,.1); color: var(--emerald-700); margin-bottom: 1rem; }
+    .contact-card h3 { font-family: var(--font-heading); font-size: 15px; font-weight: 600; color: var(--emerald-950); margin-bottom: 8px; }
+    .contact-card p { font-size: 13px; color: var(--slate-500); line-height: 1.6; }
+    .wa-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--green-500); color: #fff; padding: 14px 32px; border-radius: 999px; font-weight: 600; font-size: 15px; transition: all .3s; }
+    .wa-btn:hover { background: var(--green-600); }
+
+    .founder-photo { width: 288px; height: 320px; border-radius: 24px; overflow: hidden; box-shadow: 0 16px 48px rgba(6,78,59,.2); }
+    @media(min-width:1024px) { .founder-photo { width: 320px; height: 384px; } }
+    .founder-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .founder-badge-box { position: absolute; bottom: -16px; right: -16px; background: var(--emerald-800); color: #fff; border-radius: 16px; padding: 12px 16px; box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+    .founder-badge-box p:first-child { font-family: var(--font-heading); font-size: 13px; font-weight: 700; }
+    .founder-badge-box p:last-child { font-size: 11px; color: rgba(110,231,183,.8); }
+
+    .quote-card { background: #fff; border-radius: 20px; padding: 2rem; border: 1px solid rgba(0,0,0,.06); }
+    .quotes-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    @media(min-width:640px) { .quotes-grid { grid-template-columns: 1fr 1fr; } }
+
+    .vol-form { background: #fff; border-radius: 20px; padding: 2rem; border: 1px solid rgba(0,0,0,.06); }
+    .vol-label { display: block; font-size: 13px; font-weight: 500; color: var(--emerald-950); margin-bottom: 8px; }
+    .vol-input { width: 100%; background: #fff; border: 1.5px solid var(--slate-200); border-radius: 12px; padding: 11px 14px; color: var(--emerald-950); font-size: 14px; outline: none; transition: border-color .2s; margin-bottom: 1.25rem; }
+    .vol-input:focus { border-color: var(--emerald-600); }
+    .vol-input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media(max-width:479px) { .vol-input-grid { grid-template-columns: 1fr; } }
+    .vol-submit { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--emerald-800); color: #fff; padding: 13px; border-radius: 999px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: all .3s; }
+    .vol-submit:hover { background: var(--emerald-700); }
+
+    .ramzan-hero { position: relative; min-height: 70vh; display: flex; align-items: flex-end; padding: 8rem 1rem 4rem; background-image: url('https://media.base44.com/images/public/69d4fd229ceb0cf8009b6b09/bdf8a26e8_generated_image.png'); background-size: cover; background-position: center; }
+    .ramzan-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(2,44,34,.7), rgba(6,78,59,.65), rgba(2,44,34,.95)); }
+    .important-note { background: var(--amber-50); border-top: 1px solid #fde68a; border-bottom: 1px solid #fde68a; padding: 3rem 1rem; }
+    .note-inner { max-width: 760px; margin: 0 auto; display: flex; gap: 1rem; align-items: flex-start; }
+    .why-card { text-align: center; padding: 2rem; border-radius: 20px; border: 1px solid var(--slate-100); transition: all .3s; }
+    .why-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1); transform: translateY(-4px); }
+    .why-icon { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 16px; margin-bottom: 1.25rem; }
+    .why-card h3 { font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: var(--emerald-950); margin-bottom: .75rem; }
+    .why-card p { font-size: 13px; color: var(--slate-500); line-height: 1.65; }
+    .blockquote-styled { border-left: 2px solid var(--amber-400); padding-left: 1.25rem; margin-bottom: 2rem; }
+    .blockquote-styled p { font-family: var(--font-heading); font-style: italic; color: var(--amber-200); font-size: 17px; line-height: 1.65; margin-bottom: 8px; }
+    .blockquote-styled small { font-size: 11px; color: rgba(110,231,183,.5); }
+
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .goog-te-banner-frame { display: none !important; }
+    body { top: 0 !important; }
+    .skiptranslate { display: none !important; }
+    main { padding-top: 64px; }
+  </style>
+</head>
+<body>
+
+<div id="google_translate_element" style="display:none;position:fixed;top:72px;right:16px;z-index:9999;background:white;border-radius:12px;padding:8px;box-shadow:0 4px 24px rgba(0,0,0,.15);border:1px solid #e2e8f0"></div>
+<script>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'hi,ur,en',layout:google.translate.TranslateElement.InlineLayout.SIMPLE},'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="navigate('home')">
+      <img src="https://media.base44.com/images/public/69d4fd229ceb0cf8009b6b09/8ef0a18cc_generated_e2cb1e2b.png" alt="Logo" />
+      <div class="nav-logo-text"><h1>Ajmeri Gharib Nawaz</h1><p>Foundation</p></div>
+    </div>
+    <div class="nav-links" id="desktopNav">
+      <a onclick="navigate('home')" data-page="home">Home</a>
+      <a onclick="navigate('about')" data-page="about">About Us</a>
+      <a onclick="navigate('gharib')" data-page="gharib">Gharib Nawaz (RA)</a>
+      <a onclick="navigate('work')" data-page="work">Our Work</a>
+      <a onclick="navigate('ramzan')" data-page="ramzan">🌙 Ramzan Appeal</a>
+      <a onclick="navigate('gallery')" data-page="gallery">Gallery</a>
+      <a onclick="navigate('contact')" data-page="contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a class="nav-links nav-donate" onclick="navigate('donate')">Donate Now</a>
+      <button class="hamburger" onclick="toggleMenu()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a onclick="navigate('home');closeMenu()" data-page="home">Home</a>
+    <a onclick="navigate('about');closeMenu()" data-page="about">About Us</a>
+    <a onclick="navigate('gharib');closeMenu()" data-page="gharib">Gharib Nawaz (RA)</a>
+    <a onclick="navigate('work');closeMenu()" data-page="work">Our Work</a>
+    <a onclick="navigate('ramzan');closeMenu()" data-page="ramzan">🌙 Ramzan Appeal</a>
+    <a onclick="navigate('gallery');closeMenu()" data-page="gallery">Gallery</a>
+    <a onclick="navigate('contact');closeMenu()" data-page="contact">Contact</a>
+    <a class="mobile-donate-btn" onclick="navigate('donate');closeMenu()">Donate Now</a>
+    <button onclick="toggleTranslate()" style="display:block;width:100%;margin-top:8px;padding:11px;background:var(--emerald-50);color:var(--emerald-800);border:1px solid var(--emerald-200);border-radius:12px;font-size:13px;font-weight:600;cursor:pointer">🌐 Translate Page</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+      <div class="hero-badge">★ Ajmeri Gharib Nawaz Foundation ★</div>
+      <h1>Serving Humanity in the <em>Light of Gharib Nawaz (RA)</em></h1>
+      <p>Dedicated to compassion, equality, and selfless service — carrying forward the timeless teachings of Khwaja Moinuddin Hasan Chishti (RA).</p>
+      <div class="hero-btns">
+        <a class="btn-primary" onclick="navigate('donate')">❤️ Donate Now</a>
+        <a class="btn-ghost" onclick="navigate('volunteer')">👥 Volunteer With Us</a>
+        <button class="btn-ghost" onclick="toggleTranslate()">🌐 Translate</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <span class="eyebrow">Who We Are</span>
+          <h2 class="section-title" style="margin-top:.5rem">A Beacon of Hope,<br><em>Rooted in Devotion</em></h2>
+          <div style="color:var(--slate-600);font-size:15px;line-height:1.75">
+            <p style="margin-bottom:1rem">The Ajmeri Gharib Nawaz Foundation is a non-profit organization committed to serving the underprivileged, inspired by the sacred teachings of Hazrat Khwaja Moinuddin Hasan Chishti (RA), known to millions as <em>Gharib Nawaz</em> — "Benefactor of the Poor."</p>
+            <p>We believe that true devotion to the Almighty is expressed through compassionate service to His creation. Our work spans food distribution, education, medical aid, and community welfare — touching lives across Rajasthan and beyond.</p>
+          </div>
+          <a onclick="navigate('about')" style="display:inline-flex;align-items:center;gap:6px;margin-top:2rem;color:var(--emerald-700);font-weight:600;font-size:14px;cursor:pointer">Learn more about us →</a>
+        </div>
+        <div style="position:relative">
+          <div style="border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(6,78,59,.18);aspect-ratio:4/3">
+            <img src="https://media.base44.com/images/public/69d4fd229ceb0cf8009b6b09/4a1b341e0_generated_3fce7b24.png" alt="Foundation" style="width:100%;height:100%;object-fit:cover" />
+          </div>
+          <div style="position:absolute;bottom:24px;right:24px;background:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,.12)">
+            <p style="font-family:var(--font-heading);font-size:26px;font-weight:700;color:var(--emerald-800)">15+</p>
+            <p style="font-size:11px;color:var(--slate-500)">Years of Service</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR LEADERSHIP -->
+  <section style="background:#fff;border-bottom:1px solid var(--slate-100);padding:5rem 1rem">
+    <div class="container">
+      <div class="grid-2">
+        <div style="display:flex;justify-content:center">
+          <div style="position:relative">
+            <div class="founder-photo">
+              <img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/c066b1ff7_image.png" alt="Syed Fazlul Ameen Chishti" />
+            </div>
+            <div class="founder-badge-box">
+              <p>Founder &amp; Chairman</p>
+              <p>Ajmeri Gharib Nawaz Foundation</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow">Our Leadership</span>
+          <h2 class="section-title" style="margin-top:.5rem">Syed Fazlul Ameen Chishti</h2>
+          <p style="color:var(--amber-600);font-weight:600;font-size:13px;margin-bottom:1.25rem">Founder &amp; Chairman — Ajmeri Gharib Nawaz Foundation</p>
+          <div style="color:var(--slate-600);font-size:15px;line-height:1.75">
+            <p style="margin-bottom:1rem">Syed Fazlul Ameen Chishti is a devoted servant of humanity and a deeply respected figure in the Sufi tradition, hailing from the sacred city of Ajmer Sharif. Inspired by the timeless teachings of Hazrat Khwaja Moinuddin Hasan Chishti (RA), he founded the Ajmeri Gharib Nawaz Foundation with a singular mission — to carry forward the legacy of Gharib Nawaz by serving the poor, the needy, and the marginalized.</p>
+            <p style="margin-bottom:1rem">Under his visionary leadership, the Foundation has grown into a beacon of compassion, running daily food distribution (Langar), education programs, free medical camps, and welfare initiatives across Rajasthan. For over 35 years, he has personally overseen the Ramzan Sehri &amp; Iftar service at Ajmer Sharif Dargah — feeding hundreds of souls every single day of the holy month.</p>
+            <p>Syed Fazlul Ameen Chishti embodies the Sufi values of selfless service, unconditional love, and devotion to God through devotion to His creation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section bg-slate">
+    <div class="container">
+      <div class="text-center mb-14">
+        <span class="eyebrow">What We Do</span>
+        <h2 class="section-title" style="margin-top:.5rem">Our Areas of Service</h2>
+      </div>
+      <div class="grid-4">
+        <div class="why-card"><div class="why-icon icon-orange">🍽️</div><h3>Food Distribution</h3><p>Running daily Langar to ensure no one sleeps hungry.</p></div>
+        <div class="why-card"><div class="why-icon icon-sky">📚</div><h3>Education Support</h3><p>Providing scholarships and resources to underprivileged children.</p></div>
+        <div class="why-card"><div class="why-icon icon-rose">🏥</div><h3>Medical Aid</h3><p>Organizing free medical camps and distributing medicines.</p></div>
+        <div class="why-card"><div class="why-icon icon-violet">🏘️</div><h3>Community Welfare</h3><p>Empowering communities through skill development and relief.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RAMZAN SECTION -->
+  <section class="ramzan-section">
+    <div class="stars-bg" id="homeStars"></div>
+    <div style="position:relative;z-index:10;max-width:1200px;margin:0 auto">
+      <div class="grid-2">
+        <div>
+          <div class="ramzan-badge">🌙 Ramzan 2025 Appeal</div>
+          <h2 style="font-family:var(--font-heading);font-weight:700;font-size:clamp(1.6rem,4vw,3rem);color:#fff;line-height:1.25;margin-bottom:1rem">Ramzan Sehri &amp; <em style="color:#fcd34d">Iftar Appeal</em></h2>
+          <p style="font-family:var(--font-heading);font-size:20px;color:var(--emerald-300);font-style:italic;margin-bottom:1.5rem">"Serve Humanity, Earn Blessings"</p>
+          <p style="font-size:15px;color:rgba(209,250,229,.8);line-height:1.75;margin-bottom:2rem">For over <strong style="color:#fcd34d">35 years</strong>, Sehri and Iftar have been arranged at Ajmer Sharif Dargah, serving <strong style="color:#fcd34d">500–800 people daily</strong>.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px">
+            <a class="btn-primary" onclick="navigate('ramzan')">🔥 Sponsor a Day</a>
+            <a class="btn-ghost" onclick="navigate('ramzan')">Donate Now</a>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="highlight-card"><div class="highlight-icon bg-amber-dim">📅</div><div><p class="value c-amber">35+ Years</p><p class="label">of Unbroken Service</p></div></div>
+          <div class="highlight-card"><div class="highlight-icon bg-emerald-dim">👥</div><div><p class="value c-emerald">500–800</p><p class="label">People Fed Daily</p></div></div>
+          <div class="highlight-card"><div class="highlight-icon bg-amber-dim">💰</div><div><p class="value c-amber">₹45,000–₹50,000</p><p class="label">Daily Expense</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="impact-section">
+    <div class="container-md text-center">
+      <div class="mb-12">
+        <span class="eyebrow eyebrow-light">Our Impact</span>
+        <h2 class="section-title light" style="margin-top:.5rem">Making a Difference, Together</h2>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-item"><p class="impact-num c-amber" data-target="150000" data-suffix="+">0+</p><p class="impact-label">Meals Served</p></div>
+        <div class="impact-item"><p class="impact-num c-emerald" data-target="25000" data-suffix="+">0+</p><p class="impact-label">People Helped</p></div>
+        <div class="impact-item"><p class="impact-num c-amber" data-target="800" data-suffix="+">0+</p><p class="impact-label">Volunteers Joined</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="container-sm">
+      <p style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-600);margin-bottom:1rem">Quote of the Day</p>
+      <blockquote class="quote-text" id="quoteText"></blockquote>
+      <p style="font-size:13px;color:var(--slate-500);font-weight:500" id="quoteAttr"></p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:linear-gradient(135deg,var(--emerald-800),var(--emerald-950));padding:5rem 1rem;text-align:center">
+    <div class="container-sm">
+      <h2 style="font-family:var(--font-heading);font-weight:700;font-size:clamp(1.6rem,3.5vw,2.5rem);color:#fff;margin-bottom:1rem">Be the Change. Be the Light.</h2>
+      <p style="font-size:16px;color:var(--emerald-200);max-width:500px;margin:0 auto 2.5rem;line-height:1.7">Join us in our mission. Whether through a donation or your time, every contribution matters.</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px">
+        <a class="btn-primary" onclick="navigate('donate')">❤️ Donate Now</a>
+        <a class="btn-ghost" onclick="navigate('volunteer')">👥 Become a Volunteer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUA -->
+  <section class="dua-section">
+    <div class="container-sm text-center">
+      <div style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.1);margin-bottom:1.5rem">🌙</div>
+      <span class="eyebrow eyebrow-light" style="display:inline-block;margin-bottom:.75rem">Spiritual Support</span>
+      <h2>Request a Dua</h2>
+      <p style="font-size:15px;color:var(--emerald-200);margin-bottom:2.5rem">Share what's in your heart. Our team will remember you in their prayers at the sacred shrine of Gharib Nawaz (RA).</p>
+      <div id="duaSuccess" class="dua-success" style="display:none">
+        <p style="font-size:3rem"></p>
+        <h3>Your Dua Has Been Received</h3>
+        <p>May Allah accept your prayers. Ameen.</p>
+        <button onclick="resetDua()">Submit another request</button>
+      </div>
+      <form class="dua-form" id="duaForm" onsubmit="submitDua(event)">
+        <label class="form-label">Your Name</label>
+        <input class="form-input" type="text" id="duaName" placeholder="Enter your name" required />
+        <label class="form-label">Your Dua Request</label>
+        <textarea class="form-input" id="duaText" rows="4" placeholder="Share your prayer request..." required style="resize:none"></textarea>
+        <button class="form-submit" type="submit" id="duaBtn">Submit Dua Request</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <div class="page-hero"><div class="page-hero-bg"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/c1c793336_Ornatearchesingoldenshrinehall.png" alt="About" /></div><div class="page-hero-overlay"></div><div class="page-hero-content"><h1>About Us</h1><p>Rooted in faith, driven by compassion</p></div></div>
+  <section class="section bg-white"><div class="container"><div class="grid-2">
+    <div class="card card-pad"><h3>Our Mission</h3><p style="margin-top:.75rem">To serve the underprivileged and marginalized communities through food distribution, education support, healthcare, and community welfare programs — inspired by the teachings of Khwaja Gharib Nawaz (RA).</p></div>
+    <div class="card card-pad"><h3>Our Vision</h3><p style="margin-top:.75rem">To build a compassionate society rooted in the Sufi values of love, peace, and selfless service. We envision a world where the light of Gharib Nawaz (RA) reaches every corner.</p></div>
+  </div></div></section>
+  <section class="section bg-white"><div class="container"><div class="text-center mb-14"><span class="eyebrow">What Drives Us</span><h2 class="section-title" style="margin-top:.5rem">Our Core <em>Values</em></h2></div><div class="grid-3">
+    <div class="card card-pad card-center"><div class="card-icon"></div><h3>Humanity</h3><p>Every human being deserves love, dignity, and compassion — regardless of faith, caste, or creed.</p></div>
+    <div class="card card-pad card-center"><div class="card-icon"></div><h3>Equality</h3><p>Following the Sufi path, we serve all people equally, for in the eyes of the Creator, all are one.</p></div>
+    <div class="card card-pad card-center"><div class="card-icon"></div><h3>Service (Khidmat)</h3><p>True worship is serving those in need. Our hands are extended in help, our hearts in prayer.</p></div>
+  </div></div></section>
+</div>
+
+<!-- GHARIB NAWAZ -->
+<div class="page" id="page-gharib">
+  <div class="page-hero"><div class="page-hero-bg"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/c1c793336_Ornatearchesingoldenshrinehall.png" alt="Gharib Nawaz" /></div><div class="page-hero-overlay"></div><div class="page-hero-content"><h1>Khwaja Gharib Nawaz (RA)</h1><p>The Benefactor of the Poor</p></div></div>
+  <section class="section bg-white"><div class="container"><div class="grid-2">
+    <div><span class="eyebrow">Biography</span><h2 class="section-title" style="margin-top:.5rem">A Life Devoted to <em>Humanity</em></h2><div style="color:var(--slate-600);font-size:15px;line-height:1.75"><p style="margin-bottom:1rem">Hazrat Khwaja Moinuddin Hasan Chishti (RA), born in 1141 CE, was one of the greatest Sufi saints of the Indian subcontinent. Known lovingly as "Gharib Nawaz" — the Benefactor of the Poor — he dedicated his life to the service of God and His creation.</p><p style="margin-bottom:1rem">He settled in Ajmer, India, where he established the Chishti Order. His message of love, peace, and service transcended all boundaries of religion and culture.</p><p>His sacred shrine, the Ajmer Sharif Dargah, continues to attract millions of devotees from all faiths every year.</p></div></div>
+    <div style="display:flex;justify-content:center"><img src="https://media.base44.com/images/public/69d4fd229ceb0cf8009b6b09/d422c830c_generated_4d6f3574.png" alt="Dargah" style="border-radius:20px;box-shadow:0 16px 48px rgba(0,0,0,.15);max-height:500px;object-fit:cover;width:100%" /></div>
+  </div></div></section>
+  <section class="section bg-white"><div class="container-md"><div class="text-center mb-14"><span class="eyebrow">Words of Wisdom</span><h2 class="section-title" style="margin-top:.5rem">Inspirational <em>Quotes</em></h2></div><div class="quotes-grid">
+    <div class="quote-card"><blockquote style="font-family:var(--font-heading);font-size:17px;font-style:italic;color:var(--emerald-950);line-height:1.6;margin-bottom:1rem">"Love towards all, malice towards none."</blockquote><p style="font-size:11px;color:var(--slate-400)">— Khwaja Gharib Nawaz (RA)</p></div>
+    <div class="quote-card"><blockquote style="font-family:var(--font-heading);font-size:17px;font-style:italic;color:var(--emerald-950);line-height:1.6;margin-bottom:1rem">"Of all worship, the worship that pleases the Almighty most is granting relief to the humble and oppressed."</blockquote><p style="font-size:11px;color:var(--slate-400)">— Khwaja Gharib Nawaz (RA)</p></div>
+    <div class="quote-card"><blockquote style="font-family:var(--font-heading);font-size:17px;font-style:italic;color:var(--emerald-950);line-height:1.6;margin-bottom:1rem">"Develop river-like generosity, sun-like affection and earth-like hospitality."</blockquote><p style="font-size:11px;color:var(--slate-400)">— Khwaja Gharib Nawaz (RA)</p></div>
+    <div class="quote-card"><blockquote style="font-family:var(--font-heading);font-size:17px;font-style:italic;color:var(--emerald-950);line-height:1.6;margin-bottom:1rem">"The friend of God must have affection like the Sun — beneficial to all regardless of their faith."</blockquote><p style="font-size:11px;color:var(--slate-400)">— Khwaja Gharib Nawaz (RA)</p></div>
+  </div></div></section>
+</div>
+
+<!-- OUR WORK -->
+<div class="page" id="page-work">
+  <div class="page-hero"><div class="page-hero-bg"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/c1c793336_Ornatearchesingoldenshrinehall.png" alt="Our Work" /></div><div class="page-hero-overlay"></div><div class="page-hero-content"><h1>Our Work</h1><p>Turning compassion into action</p></div></div>
+  <div style="padding:5rem 0">
+    <div class="work-section"><div class="container"><div class="grid-2"><div><p class="work-num">01</p><h2>Food Distribution (Langar)</h2><p>Following the sacred tradition of Gharib Nawaz (RA), we organize daily food distribution programs to feed the hungry and destitute. Our volunteers serve nutritious meals to thousands every month, open to all — irrespective of religion or caste.</p></div><div><img class="work-img" src="file:///C:/Users/syedf/Downloads/ajmer%20langer%20pics.jpg" alt="Food" /></div></div></div></div>
+    <div class="work-section" style="background:var(--slate-50)"><div class="container"><div class="grid-2"><div style="order:2"><p class="work-num">02</p><h2>Education Support</h2><p>We provide scholarships, school supplies, tuition support, and mentoring to underprivileged children. Our programs focus on empowering young minds with knowledge and skills.</p></div><div style="order:1"><img class="work-img" src="https://media.base44.com/images/public/69d4fd229ceb0cf8009b6b09/057a8cf1d_generated_8f452460.png" alt="Education" /></div></div></div></div>
+    <div class="work-section"><div class="container"><div class="grid-2"><div><p class="work-num">03</p><h2>Medical Camps</h2><p>We organize regular free medical camps providing consultations, medicines, and health screenings in underserved areas.</p></div><div><img class="work-img" src="file:///C:/Users/syedf/Downloads/ad4c1711-42b9-455c-a5f3-4f047d4c7aa5.png" alt="Medical" /></div></div></div></div>
+    <div class="work-section" style="background:var(--slate-50)"><div class="container"><div class="grid-2"><div style="order:2"><p class="work-num">04</p><h2>Charity &amp; Relief Work</h2><p>In times of crisis, we step forward with immediate relief — distributing essentials like food, clothing, blankets, and clean water. Our programs also support orphans, widows, and the elderly.</p></div><div style="order:1"><img class="work-img" src="file:///C:/Users/syedf/Downloads/d88b9ee3-4c05-41f9-a1b7-fc3d62604a84%20(2).png" alt="Charity" /></div></div></div></div>
+  </div>
+</div>
+
+<!-- DONATE -->
+<div class="page" id="page-donate">
+  <div class="page-hero"><div class="page-hero-bg"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/c1c793336_Ornatearchesingoldenshrinehall.png" alt="Donate" /></div><div class="page-hero-overlay"></div><div class="page-hero-content"><h1>Donate</h1><p>Your generosity changes lives</p></div></div>
+  <section class="section bg-white"><div class="container-md">
+    <div class="text-center" style="margin-bottom:3rem"><h2 class="section-title">Your Contribution Brings <em>Hope</em></h2><p class="section-subtitle" style="margin:1rem auto 0">Every rupee you donate goes directly towards feeding the hungry, educating the young, and healing the sick.</p></div>
+    <div class="grid-2">
+      <div style="background:#fff;border-radius:18px;padding:2rem;text-align:center;border:1px solid rgba(0,0,0,.06)">
+        <h3 style="font-family:var(--font-heading);font-size:19px;font-weight:600;color:var(--emerald-950);margin-bottom:1rem">Scan &amp; Pay (UPI)</h3>
+        <div style="width:192px;height:192px;margin:0 auto 1.5rem;border-radius:14px;overflow:hidden;border:1px solid var(--slate-200)">
+          <img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/6481ab15c_image.png" alt="UPI QR" style="width:100%;height:100%;object-fit:cover" />
+        </div>
+        <p style="font-size:13px;color:var(--slate-500)">UPI: <strong style="color:var(--emerald-900)">9829172637</strong></p>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--font-heading);font-size:19px;font-weight:600;color:var(--emerald-950);margin-bottom:1.5rem">Bank Transfer</h3>
+        <div class="bank-card-row"><span class="rl">Account Name</span><div class="rv"><span>Ajmeri Gharib Nawaz Foundation</span></div></div>
+        <div class="bank-card-row"><span class="rl">Account Number</span><div class="rv"><span>00000043412760884</span></div></div>
+        <div class="bank-card-row"><span class="rl">Bank</span><div class="rv"><span>State Bank of India</span></div></div>
+        <div class="bank-card-row"><span class="rl">IFSC</span><div class="rv"><span>SBIN0031588</span></div></div>
+        <div class="bank-card-row"><span class="rl">Branch</span><div class="rv"><span>Diggi Chowk, Ajmer</span></div></div>
+      </div>
+    </div>
+    <div style="margin-top:3rem;text-align:center;background:rgba(4,120,87,.05);border-radius:20px;padding:2rem">
+      <p style="font-family:var(--font-heading);font-size:17px;font-weight:600;color:var(--emerald-700);margin-bottom:.5rem">100% Transparent &amp; Trustworthy</p>
+      <p style="font-size:13px;color:var(--slate-500);max-width:480px;margin:0 auto">Every donation is accounted for. We maintain complete transparency and provide regular updates on how your contributions make a difference.</p>
+    </div>
+  </div></section>
+</div>
+
+<!-- VOLUNTEER -->
+<div class="page" id="page-volunteer">
+  <div class="page-hero"><div class="page-hero-bg"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/c1c793336_Ornatearchesingoldenshrinehall.png" alt="Volunteer" /></div><div class="page-hero-overlay"></div><div class="page-hero-content"><h1>Volunteer With Us</h1><p>Serve with love, grow with purpose</p></div></div>
+  <section class="section" style="background:var(--slate-50)">
+    <div style="max-width:560px;margin:0 auto;padding:0 1rem">
+      <div class="text-center mb-10"><span class="eyebrow">Sign Up</span><h2 class="section-title" style="margin-top:.5rem">Join Our <em>Team</em></h2></div>
+      <div id="volSuccess" style="display:none;text-align:center;padding:4rem 2rem;background:#fff;border-radius:20px;border:1px solid rgba(0,0,0,.06)">
+        <p style="font-size:3rem;margin-bottom:1rem">🤲</p>
+        <h3 style="font-family:var(--font-heading);font-size:22px;color:var(--emerald-950);margin-bottom:.75rem">JazakAllah Khair!</h3>
+        <p style="color:var(--slate-500);font-size:14px">Thank you for volunteering. Our team will reach out to you soon.</p>
+      </div>
+      <form class="vol-form" id="volForm" onsubmit="submitVol(event)">
+        <label class="vol-label">Full Name *</label>
+        <input class="vol-input" type="text" placeholder="Your full name" required />
+        <div class="vol-input-grid">
+          <div><label class="vol-label">Phone *</label><input class="vol-input" type="tel" placeholder="+91 XXXXX XXXXX" required /></div>
+          <div><label class="vol-label">Email *</label><input class="vol-input" type="email" placeholder="your@email.com" required /></div>
+        </div>
+        <label class="vol-label">Area of Interest *</label>
+        <select class="vol-input" required>
+          <option value="" disabled selected>Select area</option>
+          <option>Food Distribution</option><option>Education Support</option><option>Medical Aid</option><option>Community Welfare</option><option>Event Management</option><option>Other</option>
+        </select>
+        <label class="vol-label">Message (Optional)</label>
+        <textarea class="vol-input" rows="3" placeholder="Tell us about yourself..." style="resize:none"></textarea>
+        <button class="vol-submit" type="submit" id="volBtn">✉️ Submit Application</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<!-- GALLERY -->
+<div class="page" id="page-gallery">
+  <div class="page-hero"><div class="page-hero-bg"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/c1c793336_Ornatearchesingoldenshrinehall.png" alt="Gallery" /></div><div class="page-hero-overlay"></div><div class="page-hero-content"><h1>Gallery</h1><p>Moments of service, devotion, and love</p></div></div>
+  <section class="section bg-white"><div class="container"><div class="text-center mb-14"><span class="eyebrow">Our Journey</span><h2 class="section-title" style="margin-top:.5rem">Capturing <em>Moments</em> of Service</h2></div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/512bf8630_ChatGPTImageApr10202609_03_12PM.png" alt="Food Distribution" /><div class="gallery-caption"><p>Daily Langar Service</p></div></div>
+        <div class="gallery-item"><img src="file:///C:/Users/syedf/OneDrive/Documents/chadar%20&%20flowers.png" alt="" /><div class="gallery-caption"><p></p></div></div>
+        <div class="gallery-item"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/01e18635c_ad4c1711-42b9-455c-a5f3-4f047d4c7aa5.png" alt="Medical" /><div class="gallery-caption"><p>Free Medical Camps</p></div></div>
+        <div class="gallery-item"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/eb03b5dd2_ChatGPTImageApr10202610_17_02PM.png" alt="" /><div class="gallery-caption"><p></p></div></div>
+        <div class="gallery-item"><img src="file:///C:/Users/syedf/Downloads/6e00a80e-9835-4d0a-b140-6e4a022606ac.png" alt="" /><div class="gallery-caption"><p></p></div></div>
+        <div class="gallery-item"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/a86390526_ChatGPTImageApr10202609_39_42PM.png" alt="" /><div class="gallery-caption"><p></p></div></div>
+        <div class="gallery-item"><img src="" alt="" /><div class="gallery-caption"><p></p></div></div>
+        <div class="gallery-item"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/f6bb4d98c_ChatGPTImageApr10202610_23_15PM.png" alt="" /><div class="gallery-caption"><p></p></div></div>
+        <div class="gallery-item"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/6caaddbbc_SFACSKC.jpg" alt="" /><div class="gallery-caption"><p></p></div></div>
+  </div></section>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div class="page-hero"><div class="page-hero-bg"><img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/c1c793336_Ornatearchesingoldenshrinehall.png" alt="Contact" /></div><div class="page-hero-overlay"></div><div class="page-hero-content"><h1>Contact Us</h1><p>We'd love to hear from you</p></div></div>
+  <section class="section bg-white"><div class="container">
+    <div class="contact-grid" style="margin-bottom:4rem">
+      <div class="contact-card"><div class="cc-icon">📍</div><h3>Address</h3><p>Near Dargah Sharif,<br>Ajmer, Rajasthan 305001, India</p></div>
+      <div class="contact-card"><div class="cc-icon">📞</div><h3>Phone</h3><p>+91 98291 72637</p></div>
+      <div class="contact-card"><div class="cc-icon">✉️</div><h3>Email</h3><p>info@agnfoundation.in<br>support@agnfoundation.in</p></div>
+      <div class="contact-card"><div class="cc-icon">🕐</div><h3>Working Hours</h3><p>Monday – Saturday<br>9:00 AM – 6:00 PM</p></div>
+    </div>
+    <div style="border-radius:20px;overflow:hidden;border:1px solid var(--slate-100)">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3573.5!2d74.6269!3d26.4569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zAjmer+Sharif+Dargah!5e0!3m2!1sen!2sin!4v1" width="100%" height="400" style="border:0;display:block" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <div style="margin-top:3rem;text-align:center">
+      <p style="font-size:14px;color:var(--slate-500);margin-bottom:1rem">Prefer chatting? Reach us instantly on WhatsApp!</p>
+      <a class="wa-btn" href="https://wa.me/919829008040?text=Assalamu%20Alaikum!%20I%20would%20like%20to%20know%20more%20about%20the%20foundation." target="_blank">Chat on WhatsApp</a>
+    </div>
+  </div></section>
+</div>
+
+<!-- RAMZAN APPEAL -->
+<div class="page" id="page-ramzan">
+  <section class="ramzan-hero">
+    <div class="ramzan-hero-overlay"></div>
+    <div id="ramzanStars" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+    <div style="position:relative;z-index:10;max-width:900px;margin:0 auto;text-align:center;width:100%">
+      <div class="ramzan-badge"> Ramzan 1446 AH · 2025</div>
+      <p style="color:var(--emerald-300);font-size:15px;margin-bottom:.75rem">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+      <h1 style="font-family:var(--font-heading);font-weight:700;font-size:clamp(2rem,5.5vw,3.75rem);color:#fff;line-height:1.2;margin-bottom:1.25rem">Ramzan Sehri &amp; <span style="color:#fcd34d;font-style:italic">Iftar Appeal</span></h1>
+      <p style="font-family:var(--font-heading);font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--emerald-200);font-style:italic;margin-bottom:2.5rem">"Serve Humanity, Earn Blessings"</p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px">
+        <a class="btn-primary" href="#donate-section">Sponsor a Day</a>
+        <a class="btn-ghost" href="#donate-section">Donate as Nazar</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white text-center"><div class="container-sm">
+    <p style="font-family:var(--font-heading);font-size:clamp(1.5rem,3.5vw,2rem);color:var(--emerald-800);margin-bottom:.5rem">السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ</p>
+    <p style="font-size:13px;color:var(--amber-600);font-weight:600;margin-bottom:2rem">Assalaamualaikum Wa Rahmatullahi Wa Barakatuh</p>
+    <div style="color:var(--slate-600);font-size:15px;line-height:1.75;text-align:left">
+      <p style="margin-bottom:1rem">We greet you with the blessed salutation of peace, praying that this holy month of Ramzan brings immeasurable blessings to you and your family.</p>
+      <p style="margin-bottom:1rem">From the blessed precincts of <strong style="color:var(--emerald-800)">Ajmer Sharif Dargah</strong>, we reach out with a sincere appeal carrying the fragrance of 35 years of unbroken devotion and service.</p>
+      <p>We invite you to participate in the <strong style="color:var(--emerald-800)">Ramzan Sehri &amp; Iftar Service</strong> — a noble cause that has fed the hungry and comforted thousands of fasting souls.</p>
+    </div>
+  </div></section>
+
+  <div class="important-note">
+    <div class="note-inner">
+      <div style="flex-shrink:0;width:40px;height:40px;border-radius:12px;background:#fde68a;display:flex;align-items:center;justify-content:center;margin-top:2px">🛡️</div>
+      <div>
+        <h3 style="font-family:var(--font-heading);font-size:17px;font-weight:700;color:#78350f;margin-bottom:10px">Important Note</h3>
+        <p style="font-size:13px;color:#92400e;line-height:1.6;margin-bottom:8px"><strong>Only Nazar (voluntary offering) contributions are accepted</strong> for the Sehri &amp; Iftar service.</p>
+        <p style="font-size:13px;color:#92400e;line-height:1.6;margin-bottom:8px"><strong>Zakat, Sadqa (mandatory), and Fitra are NOT applicable</strong> through this channel.</p>
+        <p style="font-size:13px;color:#92400e;line-height:1.6">You may donate any amount, or <strong>sponsor a full day (₹45,000–₹50,000)</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="section bg-slate" id="donate-section"><div class="container-md">
+    <div class="text-center mb-12"><span class="eyebrow eyebrow-emerald">Donate Securely</span><h2 class="section-title" style="margin-top:.5rem">How to Contribute</h2></div>
+    <div class="upi-card-big">
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--emerald-200);margin-bottom:1rem">UPI / GPay / PhonePe</p>
+      <h3 style="font-family:var(--font-heading);font-size:22px;font-weight:700;margin-bottom:1.5rem">Scan &amp; Pay via UPI</h3>
+      <!-- ONLY Personal Account QR -->
+      <div style="display:flex;justify-content:center;margin-bottom:1.5rem">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:200px;height:200px;background:#fff;border-radius:16px;overflow:hidden;border:4px solid rgba(251,191,36,.3)">
+            <img src="https://media.base44.com/images/public/69d78b87089b33ec91b4ac52/6481ab15c_image.png" alt="Personal QR" style="width:100%;height:100%;object-fit:cover" />
+          </div>
+          <p style="font-size:13px;color:var(--emerald-200);font-weight:600">Syed Fazlul Ameen Chishty</p>
+          <p style="font-size:11px;color:rgba(110,231,183,.5)">Personal Account</p>
+        </div>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:10px 20px">
+        <p style="font-size:13px;color:var(--emerald-100)">UPI Number:</p>
+        <p style="font-family:var(--font-heading);font-weight:700;font-size:22px;color:#fcd34d">9829172637</p>
+        <button class="copy-btn" onclick="copyText('9829172637',this)" style="color:#fff"></button>
+      </div>
+      <p style="font-size:11px;color:rgba(110,231,183,.6);margin-top:.75rem">GPay • PhonePe • Paytm • Any UPI App</p>
+    </div>
+    <div class="grid-2" style="gap:1.75rem">
+      <div class="bank-card-wrap">
+        <div class="bank-card-header"><h4>Personal Account</h4><span class="bank-card-badge">Syed Fazlul Ameen</span></div>
+        <div class="bank-card-body">
+          <div class="bank-card-row"><span class="rl">Name</span><div class="rv"><span>Syed Fazlul Ameen Chishty</span><button class="copy-btn" onclick="copyText('Syed Fazlul Ameen Chishty',this)"></button></div></div>
+          <div class="bank-card-row"><span class="rl">Account No</span><div class="rv"><span>30795239109</span><button class="copy-btn" onclick="copyText('30795239109',this)"></button></div></div>
+          <div class="bank-card-row"><span class="rl">IFSC</span><div class="rv"><span>SBIN0031588</span><button class="copy-btn" onclick="copyText('SBIN0031588',this)"></button></div></div>
+          <div class="bank-card-row"><span class="rl">Branch</span><div class="rv"><span>Diggi Chowk, Ajmer</span></div></div>
+        </div>
+      </div>
+      <div class="bank-card-wrap">
+        <div class="bank-card-header"><h4>Foundation Account</h4><span class="bank-card-badge">Official</span></div>
+        <div class="bank-card-body">
+          <div class="bank-card-row"><span class="rl">Name</span><div class="rv"><span style="font-size:12px">Ajmeri Gharib Nawaz Foundation</span><button class="copy-btn" onclick="copyText('Ajmeri Gharib Nawaz Foundation',this)"></button></div></div>
+          <div class="bank-card-row"><span class="rl">Account No</span><div class="rv"><span>00000043412760884</span><button class="copy-btn" onclick="copyText('00000043412760884',this)"></button></div></div>
+          <div class="bank-card-row"><span class="rl">IFSC</span><div class="rv"><span>SBIN0031588</span><button class="copy-btn" onclick="copyText('SBIN0031588',this)"></button></div></div>
+          <div class="bank-card-row"><span class="rl">Branch</span><div class="rv"><span>Diggi Chowk, Ajmer</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;text-align:center">
+      <p style="font-size:13px;color:var(--slate-500);margin-bottom:1rem">After donating, share your details on WhatsApp for confirmation</p>
+      <a class="wa-btn" href="https://wa.me/919829008040?text=Assalaamualaikum!%20I%20have%20made%20a%20Nazar%20contribution%20for%20Ramzan%20Sehri%20%26%20Iftar%20at%20Ajmer%20Sharif." target="_blank"> Confirm on WhatsApp</a>
+    </div>
+  </div></section>
+
+  <section style="background:linear-gradient(135deg,var(--emerald-950),#0a2a1a,var(--emerald-950));padding:6rem 1rem;position:relative;overflow:hidden">
+    <div id="ramzanStars2" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+    <div style="position:relative;z-index:10;max-width:1100px;margin:0 auto">
+      <div class="grid-2">
+        <div style="display:flex;flex-direction:column;justify-content:center">
+          <p style="font-size:2rem;margin-bottom:1rem"></p>
+          <h2 style="font-family:var(--font-heading);font-weight:700;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin-bottom:1.25rem">Contribute in This Blessed Month</h2>
+          <p style="font-size:15px;color:rgba(209,250,229,.8);line-height:1.75;margin-bottom:2rem">Let this Ramzan be the one where your generosity becomes a sadaqah-e-jariya — a continuous blessing.</p>
+          <div class="blockquote-styled">
+            <p>"Whoever feeds a fasting person will have a reward like that of the fasting person, without any reduction in his reward."</p>
+            <small>— Hadith, Tirmidhi</small>
+          </div>
+          <a class="btn-primary" href="#donate-section" style="width:fit-content">🔥 Donate Now</a>
+        </div>
+        <div style="background:rgba(255,255,255,.05);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2rem">
+          <h3 style="font-family:var(--font-heading);font-weight:700;font-size:19px;color:#fff;margin-bottom:.5rem">Request a Dua</h3>
+          <p style="font-size:13px;color:rgba(110,231,183,.7);margin-bottom:1.5rem">Share your prayer — we include it in duas during Ramzan at Ajmer Sharif.</p>
+          <div id="ramzanDuaSuccess" style="display:none;text-align:center;padding:2rem 0">
+            <p style="font-family:var(--font-heading);color:#fff;font-size:18px">Ameen!</p>
+            <p style="font-size:13px;color:rgba(110,231,183,.7);margin-top:6px">May Allah accept your prayers.</p>
+            <button onclick="resetRamzanDua()" style="margin-top:14px;color:var(--amber-400);font-size:13px;text-decoration:underline">Submit another</button>
+          </div>
+          <form id="ramzanDuaForm" onsubmit="submitRamzanDua(event)">
+            <input class="form-input" type="text" id="rDuaName" placeholder="Your Name" required style="margin-bottom:1rem"/>
+            <textarea class="form-input" id="rDuaText" rows="3" placeholder="Your Dua request..." required style="margin-bottom:1rem;resize:none"></textarea>
+            <button class="form-submit" type="submit" id="rDuaBtn">Submit Dua Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-top-bar"></div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Ajmeri Gharib Nawaz Foundation</h3>
+        <p>Dedicated to compassion, equality, and selfless service — inspired by the teachings of Khwaja Moinuddin Hasan Chishti (RA).</p>
+        <div style="font-size:13px;color:#fbbf24">❤️ Serving Humanity Since Day One</div>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul>
+        <li><a onclick="navigate('about')">About Us</a></li>
+        <li><a onclick="navigate('work')">Our Work</a></li>
+        <li><a onclick="navigate('gallery')">Gallery</a></li>
+        <li><a onclick="navigate('contact')">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Get Involved</h4><ul>
+        <li><a onclick="navigate('donate')">Donate</a></li>
+        <li><a onclick="navigate('volunteer')">Volunteer</a></li>
+        <li><a onclick="navigate('gharib')">Gharib Nawaz (RA)</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact Us</h4>
+        <div class="footer-contact-item"><span class="footer-contact-icon"></span><span>Near Dargah Sharif, Ajmer, Rajasthan, India</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon"></span><span>+91 98291 72637</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon"></span><span>info@agnfoundation.in</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Ajmeri Gharib Nawaz Foundation. All rights reserved.</p>
+      <p style="margin-top:4px">"The river that brings happiness to others brings happiness to itself." — Khwaja Gharib Nawaz (RA)</p>
+      <h3 style="margin-top:8px;font-size:28px;color:rgba(255,255,255,.2)">Developed by SYED FAIZ HUSSAIN
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" href="https://wa.me/919829172637?text=Assalamu%20Alaikum!%20I%20would%20like%20to%20know%20more%20about%20the%20foundation." target="_blank">💬 <span>WhatsApp</span></a>
+
+<script>
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page === page));
+  window.scrollTo({top:0, behavior:'smooth'});
+  closeMenu();
+  if (page === 'home') setTimeout(checkCounters, 400);
+}
+let menuOpen = false;
+function toggleMenu() { menuOpen = !menuOpen; document.getElementById('mobileMenu').classList.toggle('open', menuOpen); }
+function closeMenu() { menuOpen = false; document.getElementById('mobileMenu').classList.remove('open'); }
+function toggleTranslate() { const el = document.getElementById('google_translate_element'); if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none'; }
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const quotes = [
+  { text: 'Love all, serve all, harm none.', attr: 'Khwaja Moinuddin Chishti (RA)' },
+  { text: 'The best form of worship is to serve mankind.', attr: 'Khwaja Moinuddin Chishti (RA)' },
+  { text: 'River-like generosity, sun-like affection, earth-like hospitality — these are the signs of a true dervish.', attr: 'Khwaja Gharib Nawaz (RA)' },
+  { text: 'Become the dust at the feet of the poor and the destitute — for in their service lies your salvation.', attr: 'Khwaja Moinuddin Chishti (RA)' },
+];
+const qi = new Date().getDate() % quotes.length;
+document.getElementById('quoteText').textContent = '"' + quotes[qi].text + '"';
+document.getElementById('quoteAttr').textContent = '— ' + quotes[qi].attr;
+
+let countersStarted = false;
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target), suffix = el.dataset.suffix || '', dur = 2000, steps = 60;
+  let cur = 0; const inc = target / steps;
+  const t = setInterval(() => { cur += inc; if (cur >= target) { cur = target; clearInterval(t); } el.textContent = Math.floor(cur).toLocaleString('en-IN') + suffix; }, dur / steps);
+}
+function checkCounters() {
+  if (countersStarted) return;
+  const els = document.querySelectorAll('[data-target]');
+  if (!els.length) return;
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); obs.unobserve(e.target); } }); }, {threshold: 0.3});
+  els.forEach(el => obs.observe(el));
+  countersStarted = true;
+}
+checkCounters();
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => { const o = btn.innerHTML; btn.innerHTML = ''; setTimeout(() => { btn.innerHTML = o; }, 2000); });
+}
+
+function submitDua(e) {
+  e.preventDefault();
+  const btn = document.getElementById('duaBtn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div>';
+  setTimeout(() => { document.getElementById('duaForm').style.display = 'none'; document.getElementById('duaSuccess').style.display = 'flex'; }, 1000);
+}
+function resetDua() {
+  document.getElementById('duaForm').style.display = 'block';
+  document.getElementById('duaSuccess').style.display = 'none';
+  document.getElementById('duaName').value = '';
+  document.getElementById('duaText').value = '';
+  const btn = document.getElementById('duaBtn');
+  btn.disabled = false; btn.innerHTML = '✉️ Submit Dua Request';
+}
+
+function submitVol(e) {
+  e.preventDefault();
+  const btn = document.getElementById('volBtn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div> Submitting...';
+  setTimeout(() => { document.getElementById('volForm').style.display = 'none'; document.getElementById('volSuccess').style.display = 'block'; }, 1000);
+}
+
+function submitRamzanDua(e) {
+  e.preventDefault();
+  const btn = document.getElementById('rDuaBtn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div>';
+  setTimeout(() => { document.getElementById('ramzanDuaForm').style.display = 'none'; document.getElementById('ramzanDuaSuccess').style.display = 'block'; }, 1000);
+}
+function resetRamzanDua() {
+  document.getElementById('ramzanDuaForm').style.display = 'block';
+  document.getElementById('ramzanDuaSuccess').style.display = 'none';
+  document.getElementById('rDuaName').value = '';
+  document.getElementById('rDuaText').value = '';
+  const btn = document.getElementById('rDuaBtn');
+  btn.disabled = false; btn.innerHTML = '✉️ Submit Dua Request';
+}
+
+function generateStars(id, count) {
+  const c = document.getElementById(id);
+  if (!c) return;
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = 'width:1px;height:1px;top:' + (Math.random()*80) + '%;left:' + (Math.random()*100) + '%;opacity:' + (.3+Math.random()*.5);
+    c.appendChild(s);
+  }
+}
+generateStars('homeStars', 30);
+generateStars('ramzanStars', 40);
+generateStars('ramzanStars2', 35);
+</script>
+</body>
+</html>
